@@ -4,12 +4,13 @@ import { cartContext } from '../../Context/Cart.context';
 import axios from 'axios';
 import { userContext } from '../../Context/User.Context';
 import toast from 'react-hot-toast';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 export default function Checkout() {
 const {cartInfo, setCartInfo  }=useContext(cartContext)
 const {token} = useContext(userContext)
 const[orderType, setOrderType]=useState(null)
-
+const Navigate = useNavigate()
 
 
  async function creatCashOrder(values){
@@ -22,7 +23,10 @@ const[orderType, setOrderType]=useState(null)
     }
     let{data}= await axios.request(options )
     console.log(data);
-    setCartInfo([])
+    setCartInfo([]);
+    setTimeout(()=>{
+    Navigate("/allorders")
+    },2000)
 }
 
 

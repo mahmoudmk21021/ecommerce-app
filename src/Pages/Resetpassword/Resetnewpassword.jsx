@@ -4,10 +4,9 @@ import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-import login from "./Login";
 import { userContext } from "../../Context/User.Context";
 import Forgot from "./../Forgot/Forgot";
-export default function Login() {
+export default function Resetnewpassword() {
   const [errorMsg, setErrorMsg] = useState(null);
   const navigate = useNavigate();
 
@@ -31,9 +30,13 @@ export default function Login() {
     let id;
     try {
       const options = {
-        url: "https://ecommerce.routemisr.com/api/v1/auth/signin",
-        method: "Post",
+        url: "https://ecommerce.routemisr.com/api/v1/auth/resetPassword",
+        method: "PUT",
         data: values,
+        headers: {
+          email: "",
+          newPassword: "",
+        },
       };
 
       id = toast.loading("wating ....");
@@ -75,7 +78,7 @@ export default function Login() {
     <section>
       <h2 className="text-2xl font-bold text-primary mb-6">
         <i className="fa-regular fa-circle-user me-3"></i>
-        <span>login Now</span>
+        <span>reset New password</span>
       </h2>
       <form
         action=""
@@ -128,8 +131,6 @@ export default function Login() {
         <button type="submit" className="btn-primary">
           Login
         </button>
-
-        <Link to="/auth/forgotPasswords"> forgot password</Link>
       </form>
     </section>
   );
